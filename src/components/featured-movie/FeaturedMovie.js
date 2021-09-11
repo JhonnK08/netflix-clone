@@ -43,7 +43,7 @@ const FeaturedMovie = ({ item }) => {
 							<a href={`/list/add/${item.id}`} className="featured--mylistbutton">+ Minha Lista</a>
 						</div>
 						<div className="featured--genres">
-							<strong>Gêneros:</strong>
+							<strong>Gêneros: </strong>
 							{genres.join(', ')}
 						</div>
 					</div>
