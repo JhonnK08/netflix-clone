@@ -19,6 +19,7 @@ const basicFetch = async (endpoint) => {
 // eslint-disable-next-line
 export default {
 	getHomeList: async () => {
+		console.log('process.env.REACT_APP_API_KEY', process.env.REACT_APP_API_KEY);
 		return [
 			{
 				slug: 'originals',
