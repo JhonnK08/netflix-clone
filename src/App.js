@@ -19,7 +19,9 @@ const App = () => {
 
 			// Catching featured movie
 			let originals = list.filter((movie) => movie.slug === 'originals');
-			let randomChosen = Math.floor(Math.random() * (originals[0].items.results.length - 1))
+			let randomChosen = Math.floor(
+				Math.random() * (originals[0].items.results.length - 1)
+			);
 			let chosenMovie = originals[0].items.results[randomChosen];
 			let chosenMovieInfo = await Tmdb.getMovieInfo(chosenMovie.id, 'tv');
 			setFeaturedData(chosenMovieInfo);
@@ -35,26 +37,46 @@ const App = () => {
 			} else {
 				setBlackHeader(false);
 			}
-		}
+		};
 
 		window.addEventListener('scroll', scrollListener);
 		return () => {
 			window.removeEventListener('scroll', scrollListener);
-		}
-	}, [])
+		};
+	}, []);
 
 	return (
 		<div className="page">
 			<Header black={blackHeader} />
-			{
-				featuredData &&
-				<FeaturedMovie item={featuredData}/>
-			}
+			{featuredData && <FeaturedMovie item={featuredData} />}
 			<section className="lists">
 				{movieList.map((item, key) => (
 					<MovieRow key={key} title={item.title} items={item.items} />
 				))}
 			</section>
+
+			<footer>
+				Feito com{' '}
+				<span role="img" aria-label="coração">
+					❤️
+				</span>{' '}
+				por Jhonatan Konopp
+				<br />
+				Direitos de imagem para Netflix
+				<br />
+				Dados coletados do site{' '}
+				<a href="https://themoviedb.org" target="_blank">
+					themoviedb.org
+				</a>
+			</footer>
+			{movieList.length <= 0 && (
+				<div className="loading">
+					<img
+						src="https://media.filmelier.com/noticias/br/2020/03/Netflix_LoadTime.gif"
+						alt="Carregando"
+					/>
+				</div>
+			)}
 		</div>
 	);
 };
